@@ -56,7 +56,7 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Background="Black"/>
                 <TextBlock Grid.Row="2" Text="A" VerticalAlignment ="Center" HorizontalAlignment ="Center" Foreground="Snow" FontFamily="Cascadia Code SemiBold" FontSize="14"/>
-                <TextBox x:Name="TextBlockA" Grid.Row="2" Grid.Column="2" Text="100" Background="White" Foreground="DarkCyan" BorderBrush="{x:Null}" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <TextBox x:Name="TextBlockA" Grid.Row="2" Grid.Column="2" Text="255" Background="White" Foreground="DarkCyan" BorderBrush="{x:Null}" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
 
                 </TextBox>
                 <TextBlock  Grid.Row="3" Text="R" VerticalAlignment ="Center" HorizontalAlignment ="Center" Foreground="Snow" FontFamily="Cascadia Code SemiBold" FontSize="14"/>
