@@ -1,5 +1,7 @@
 # TableTop2D
 
+WPF приложение (без MVVM). Для запуска нужно установить [.NET](https://dotnet.microsoft.com/download/dotnet-framework).
+
 ## Что реализовано?
 
 Пользователь может: 
