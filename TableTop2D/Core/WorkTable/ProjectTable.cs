@@ -78,9 +78,9 @@ namespace TableTop2D.Core.WorkTable
             var cellLongY = TableCanvas.Height / Size.Height;
 
             for (ushort x = 0; x < Size.Width; x++)
-                if (cellLongX * x < cursorPosition.X && cursorPosition.X < cellLongX * (x + 1))
+                if (cellLongX * x + 1 < cursorPosition.X && cursorPosition.X < cellLongX * (x + 1) + 1)
                     for (ushort y = 0; y < Size.Height; y++)
-                        if (cellLongY * y < cursorPosition.Y && cursorPosition.Y < cellLongY * (y + 1))
+                        if (cellLongY * y + 1 < cursorPosition.Y && cursorPosition.Y < cellLongY * (y + 1) + 1)
                             return new Point(x * cellLongX + (cellLongX - width) / 2, y * cellLongY + (cellLongY - height) / 2);
 
             throw new Exception("Курсор за полем!");
