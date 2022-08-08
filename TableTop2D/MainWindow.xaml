@@ -110,22 +110,46 @@
                     <Button Content="⭕" 
                             Background="{x:Null}" BorderBrush="{x:Null}" 
                             Foreground="Teal" 
-                            Click="SetFigureColorClick"/>
+                            Click="SetFigureColorClick">
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Удалить цвет" Click="ResetColor"/>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
                     <Grid Width="10"/>
                     <Button Content="⭕" 
                             Background="{x:Null}" BorderBrush="{x:Null}" 
                             Foreground="Teal"
-                            Click="SetFigureColorClick"/>
+                            Click="SetFigureColorClick">
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Удалить цвет" Click="ResetColor"/>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
                     <Grid Width="10"/>
                     <Button Content="⭕" 
                             Background="{x:Null}" BorderBrush="{x:Null}" 
                             Foreground="Teal" 
-                            Click="SetFigureColorClick"/>
+                            Click="SetFigureColorClick">
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Удалить цвет" Click="ResetColor"/>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
                     <Grid Width="10"/>
                     <Button Content="⭕" 
                             Background="{x:Null}" BorderBrush="{x:Null}" 
                             Foreground="Teal"
-                            Click="SetFigureColorClick"/>
+                            Click="SetFigureColorClick">
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Удалить цвет" Click="ResetColor"/>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
                     <Grid Width="10"/>
                     <!-- Standart colors -->
                     <Button Content="🔥" 

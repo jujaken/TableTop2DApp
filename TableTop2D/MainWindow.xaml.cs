@@ -15,7 +15,7 @@ namespace TableTop2D
         #region Selected params
 
         private IFigure.SizeFigure _SelectedSize = IFigure.SizeFigure.Middle;
-        private string _SelectedFigureName = "Ellipse"; 
+        private string _SelectedFigureName = "Ellipse";
         private Brush _SelectedColor = Brushes.Red;
 
         #endregion
@@ -32,12 +32,12 @@ namespace TableTop2D
 
         private void CreateNewProject(object sender, RoutedEventArgs e)
         {
-            
+
             try
             {
                 var height = Convert.ToByte(HelloMenuHeight.Text);
-                var width = HelloMenuWidth.Text == "Высота" ? height: Convert.ToByte(HelloMenuWidth.Text);
-                
+                var width = HelloMenuWidth.Text == "Высота" ? height : Convert.ToByte(HelloMenuWidth.Text);
+
                 var canvas = new Canvas() { Width = 500, Height = 500, Background = Brushes.White };
                 _ProjectTable = new ProjectTable(ref canvas, width, height);
                 CenterMenu.Children.Add(canvas);
@@ -56,14 +56,14 @@ namespace TableTop2D
         {
             var button = sender as Button ?? throw new Exception("Я не знаю как, но ты всё сломал");
 
-            switch(button.Content)
+            switch (button.Content)
             {
                 case "Little": _SelectedSize = IFigure.SizeFigure.Little; break;
                 case "Middle": _SelectedSize = IFigure.SizeFigure.Middle; break;
                 case "Big": _SelectedSize = IFigure.SizeFigure.Big; break;
             }
         }
-        
+
         private void SetFigureButtonClick(object sender, RoutedEventArgs e)
         {
             var button = sender as Button ?? throw new Exception("Я не знаю как, но ты всё сломал");
@@ -75,7 +75,7 @@ namespace TableTop2D
                 case "⬛️": _SelectedFigureName = "Rectangle"; break;
             }
         }
-        
+
         private void SetFigureColorClick(object sender, RoutedEventArgs e)
         {
             CurrentButton = sender as Button ?? throw new Exception("Я не знаю как, но ты всё сломал");
@@ -122,10 +122,20 @@ namespace TableTop2D
             };
 
             if (_ProjectTable == null) throw new Exception();
-            
+
             _ProjectTable.CreateNewFigure(ref _ProjectTable, figure);
         }
 
+        private void ResetColor(object sender, RoutedEventArgs e)
+        {
+            var menuItem = sender as MenuItem ?? throw new Exception("Я не знаю как, но ты всё сломал");
+            var button = ((ContextMenu)menuItem.Parent).PlacementTarget as Button;
+            if (button != null)
+            {
+                button.Foreground = Brushes.Teal;
+                button.Content = "⭕";
+            }    
+        }
         #endregion
     }
 }
