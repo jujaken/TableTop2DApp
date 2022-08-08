@@ -109,38 +109,38 @@
                     <Grid Width="40"/>
                     <Button Content="⭕" 
                             Background="{x:Null}" BorderBrush="{x:Null}" 
-                            Foreground="DarkCyan" 
+                            Foreground="#018b8b" 
                             Click="SetFigureColorClick"/>
                     <Grid Width="10"/>
                     <Button Content="⭕" 
                             Background="{x:Null}" BorderBrush="{x:Null}" 
-                            Foreground="DarkCyan"
+                            Foreground="#018b8b"
                             Click="SetFigureColorClick"/>
                     <Grid Width="10"/>
                     <Button Content="⭕" 
                             Background="{x:Null}" BorderBrush="{x:Null}" 
-                            Foreground="DarkCyan" 
+                            Foreground="#018b8b" 
                             Click="SetFigureColorClick"/>
                     <Grid Width="10"/>
                     <Button Content="⭕" 
                             Background="{x:Null}" BorderBrush="{x:Null}" 
-                            Foreground="DarkCyan"
+                            Foreground="#018b8b"
                             Click="SetFigureColorClick"/>
                     <Grid Width="10"/>
                     <!-- Standart colors -->
                     <Button Content="🔥" 
                             Background="{x:Null}" BorderBrush="{x:Null}" 
-                            Foreground="Green" 
+                            Foreground="DarkCyan" 
                             Click="SetFigureStandartColorClick"/>
                     <Grid Width="10"/>
                     <Button Content="🔥" 
                             Background="{x:Null}" BorderBrush="{x:Null}" 
-                            Foreground="Blue" 
+                            Foreground="SeaGreen" 
                             Click="SetFigureStandartColorClick"/>
                     <Grid Width="10"/>
                     <Button Content="🔥" 
                             Background="{x:Null}" BorderBrush="{x:Null}" 
-                            Foreground="Red" 
+                            Foreground="IndianRed" 
                             Click="SetFigureStandartColorClick"/>
                 </StackPanel>
             </Grid>
