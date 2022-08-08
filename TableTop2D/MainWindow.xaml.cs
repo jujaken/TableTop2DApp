@@ -80,7 +80,7 @@ namespace TableTop2D
         {
             CurrentButton = sender as Button ?? throw new Exception("Я не знаю как, но ты всё сломал");
 
-            if (CurrentButton.Foreground == Brushes.DarkCyan)
+            if (CurrentButton.Foreground == new SolidColorBrush() { Color = Color.FromRgb(1, 139, 139) })
             {
                 _ColorSelection = new ColorSelection
                 {
