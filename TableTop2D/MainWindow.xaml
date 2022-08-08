@@ -109,22 +109,22 @@
                     <Grid Width="40"/>
                     <Button Content="⭕" 
                             Background="{x:Null}" BorderBrush="{x:Null}" 
-                            Foreground="#018b8b" 
+                            Foreground="Teal" 
                             Click="SetFigureColorClick"/>
                     <Grid Width="10"/>
                     <Button Content="⭕" 
                             Background="{x:Null}" BorderBrush="{x:Null}" 
-                            Foreground="#018b8b"
+                            Foreground="Teal"
                             Click="SetFigureColorClick"/>
                     <Grid Width="10"/>
                     <Button Content="⭕" 
                             Background="{x:Null}" BorderBrush="{x:Null}" 
-                            Foreground="#018b8b" 
+                            Foreground="Teal" 
                             Click="SetFigureColorClick"/>
                     <Grid Width="10"/>
                     <Button Content="⭕" 
                             Background="{x:Null}" BorderBrush="{x:Null}" 
-                            Foreground="#018b8b"
+                            Foreground="Teal"
                             Click="SetFigureColorClick"/>
                     <Grid Width="10"/>
                     <!-- Standart colors -->
