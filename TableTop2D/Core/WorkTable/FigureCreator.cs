@@ -43,7 +43,7 @@ namespace TableTop2D.Core.WorkTable
             {
                 IFigure.SizeFigure.Little => (cellWidth - cellWidth / 2, cellHeight - cellHeight / 2),
                 IFigure.SizeFigure.Middle => (cellWidth - cellWidth / 4, cellHeight - cellHeight / 4),
-                IFigure.SizeFigure.Big => (cellWidth - cellWidth / 10, cellHeight - cellHeight / 10),
+                IFigure.SizeFigure.Big => (cellWidth, cellHeight),
                 _ => throw new NotImplementedException()
             };
 
