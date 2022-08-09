@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="TableTop2D"
+        Icon="Resources/Icon.ico"
         Height="600" Width="600"
         MinHeight="600" MinWidth="600"
         WindowStartupLocation="CenterScreen">
