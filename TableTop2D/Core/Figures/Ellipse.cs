@@ -1,7 +1,7 @@
 ﻿using System.Windows.Media;
 using TableTop2D.Core.Base.Interfaces;
 
-namespace TableTop2D.Models.Figures
+namespace TableTop2D.Core.Figures
 {
     internal class Ellipse : IFigure
     {
