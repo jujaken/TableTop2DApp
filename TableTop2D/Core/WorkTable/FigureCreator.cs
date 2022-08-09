@@ -107,7 +107,20 @@ namespace TableTop2D.Core.WorkTable
             _FigureCanvas.PreviewMouseMove += PreviewMouseMove;
             _FigureCanvas.PreviewMouseLeftButtonUp += PreviewMouseLeftButtonUp;
 
+            var contextMenu = new ContextMenu();
+            _FigureCanvas.ContextMenu = contextMenu;
+
+            var deleteFigureItem = new MenuItem() { Header = "Удалить фигуру" };
+            deleteFigureItem.Click += DeleteFigure;
+            
+            contextMenu.Items.Add(deleteFigureItem);
+
             workTable.TableCanvas.Children.Add(_FigureCanvas);
+        }
+
+        private void DeleteFigure(object sender, RoutedEventArgs e)
+        {
+            _FigureCanvas.Children.Clear();
         }
 
         #region Previews
