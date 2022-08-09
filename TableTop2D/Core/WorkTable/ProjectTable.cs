@@ -38,6 +38,12 @@ namespace TableTop2D.Core.WorkTable
             workTable.FigureList.Add(figure);
         }
 
+        public void CreateNewImage(ref ProjectTable workTable, IFigure figure, Image image)
+        {
+            new FigureCreator(ref workTable, figure, image);
+            workTable.FigureList.Add(figure);
+        }
+
         #region BorderCreate
 
         private void BorderCreate()

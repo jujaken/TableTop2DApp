@@ -6,6 +6,7 @@ using System.Windows.Media;
 using TableTop2D.Core.Base.Interfaces;
 using TableTop2D.Core.WorkTable;
 using TableTop2D.Core.Figures;
+using System.Windows.Media.Imaging;
 
 namespace TableTop2D
 {
@@ -113,17 +114,53 @@ namespace TableTop2D
 
         private void CreateNewFigure(object sender, RoutedEventArgs e)
         {
-            IFigure figure = _SelectedFigureName switch
+            var figure = GetIFigureType();
+
+            if (_ProjectTable == null) throw new Exception();
+
+            _ProjectTable.CreateNewFigure(ref _ProjectTable, figure);
+        }
+
+        private void CreateNewImage(object sender, RoutedEventArgs e)
+        {
+            var dialog = new Microsoft.Win32.OpenFileDialog
+            {
+                DefaultExt = ".png",
+                Filter = "Картинка (.png)|*.png;*.jpg;*.jpeg"
+            };
+            var result = dialog.ShowDialog();
+
+            if (result != true) return;
+
+            string path = dialog.FileName;
+
+            var bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.UriSource = new Uri(path, UriKind.Absolute);
+            bitmapImage.EndInit();
+
+            var image = new Image()
+            {
+                Stretch = Stretch.Fill,
+                Source = bitmapImage
+            };
+
+            var figure = GetIFigureType();
+
+            if (_ProjectTable == null) throw new Exception();
+
+            _ProjectTable.CreateNewImage(ref _ProjectTable, figure, image);
+        }
+
+        private IFigure GetIFigureType()
+        {
+            return _SelectedFigureName switch
             {
                 "Polygon" => new Polygon(_SelectedColor, _SelectedSize),
                 "Ellipse" => new Ellipse(_SelectedColor, _SelectedSize),
                 "Rectangle" => new Rectangle(_SelectedColor, _SelectedSize),
                 _ => throw new Exception("План пошёл не по плану")
             };
-
-            if (_ProjectTable == null) throw new Exception();
-
-            _ProjectTable.CreateNewFigure(ref _ProjectTable, figure);
         }
 
         private void ResetColor(object sender, RoutedEventArgs e)

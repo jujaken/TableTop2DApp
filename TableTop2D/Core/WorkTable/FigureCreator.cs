@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TableTop2D.Core.Base.Interfaces;
 
@@ -27,7 +28,7 @@ namespace TableTop2D.Core.WorkTable
         private readonly double _Width;
         private readonly double _Height;
 
-        public FigureCreator(ref ProjectTable workTable, IFigure figure)
+        public FigureCreator(ref ProjectTable workTable, IFigure figure, Image? image = null)
         {
             _WorkTable = workTable;
 
@@ -58,10 +59,11 @@ namespace TableTop2D.Core.WorkTable
                     {
                         Width = _Width,
                         Height = _Height,
-                        Fill = color
+                        Fill = image == null ? color : new ImageBrush(image.Source),
                     };
                     Canvas.SetLeft(ellipse, pos.X);
                     Canvas.SetTop(ellipse, pos.Y);
+
                     _FigureCanvas.Children.Add(ellipse);
                     break;
 
@@ -74,7 +76,7 @@ namespace TableTop2D.Core.WorkTable
                     {
                         Width = _Width,
                         Height = _Height,
-                        Fill = color
+                        Fill = image == null ? color : new ImageBrush(image.Source),
                     };
                     polygon.Points.Add(new Point(0, polygon.Height));
                     polygon.Points.Add(new Point(polygon.Width, polygon.Height));
@@ -93,7 +95,7 @@ namespace TableTop2D.Core.WorkTable
                     {
                         Width = _Width,
                         Height = _Height,
-                        Fill = color
+                        Fill = image == null ? color : new ImageBrush(image.Source),
                     };
                     Canvas.SetLeft(rectangle, pos.X);
                     Canvas.SetTop(rectangle, pos.Y);
@@ -112,7 +114,7 @@ namespace TableTop2D.Core.WorkTable
 
             var deleteFigureItem = new MenuItem() { Header = "Удалить фигуру" };
             deleteFigureItem.Click += DeleteFigure;
-            
+
             contextMenu.Items.Add(deleteFigureItem);
 
             workTable.TableCanvas.Children.Add(_FigureCanvas);
