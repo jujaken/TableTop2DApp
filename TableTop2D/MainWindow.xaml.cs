@@ -126,7 +126,7 @@ namespace TableTop2D
             var dialog = new Microsoft.Win32.OpenFileDialog
             {
                 DefaultExt = ".png",
-                Filter = "Картинка (.png)|*.png;*.jpg;*.jpeg"
+                Filter = "Картинка (.png)|*.png;*.jpg;*.jpeg;*.gif"
             };
             var result = dialog.ShowDialog();
 
