@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using TableTop2D.Core.Base.Interfaces;
 using TableTop2D.Core.WorkTable;
-using TableTop2D.Models.Figures;
+using TableTop2D.Core.Figures;
 
 namespace TableTop2D
 {
