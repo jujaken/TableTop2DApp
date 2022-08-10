@@ -12,7 +12,8 @@ namespace TableTop2D.Core.Base.Interfaces
         {
             Little,
             Middle,
-            Big
+            Big,
+            Point
         }
     }
 }

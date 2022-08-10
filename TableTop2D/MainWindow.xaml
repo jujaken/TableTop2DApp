@@ -55,6 +55,7 @@
                 <ContextMenu>
                     <MenuItem Header="Создать фигуру" Click="CreateNewFigure"/>
                     <MenuItem Header="Вставить изображение" Click="CreateNewImage"/>
+                    <MenuItem Header="Создать отрезок" Click="CreateNewSegment"/>
                 </ContextMenu>
             </Grid.ContextMenu>
         </Grid>

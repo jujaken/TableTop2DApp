@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using TableTop2D.Core.Base.Interfaces;
+using TableTop2D.Core.Figures;
 
 namespace TableTop2D.Core.WorkTable
 {
@@ -41,6 +42,12 @@ namespace TableTop2D.Core.WorkTable
         public void CreateNewImage(ref ProjectTable workTable, IFigure figure, Image image)
         {
             new FigureCreator(ref workTable, figure, image);
+            workTable.FigureList.Add(figure);
+        }
+
+        public void CreateNewSegment(ref ProjectTable workTable, IFigure figure)
+        {
+            new SegmentCreator(ref workTable, figure.Color);
             workTable.FigureList.Add(figure);
         }
 

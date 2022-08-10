@@ -28,6 +28,9 @@ namespace TableTop2D.Core.WorkTable
         private readonly double _Width;
         private readonly double _Height;
 
+        public event Action? FigureDeleted;
+        public event Action? FigureMoving;
+
         public FigureCreator(ref ProjectTable workTable, IFigure figure, Image? image = null)
         {
             _WorkTable = workTable;
@@ -42,7 +45,8 @@ namespace TableTop2D.Core.WorkTable
 
             (_Width, _Height) = _Figure.Size switch
             {
-                IFigure.SizeFigure.Little => (cellWidth - cellWidth / 2, cellHeight - cellHeight / 2),
+                IFigure.SizeFigure.Point => (cellWidth / 5, cellHeight / 5),
+                IFigure.SizeFigure.Little => (cellWidth / 2, cellHeight / 2),
                 IFigure.SizeFigure.Middle => (cellWidth - cellWidth / 4, cellHeight - cellHeight / 4),
                 IFigure.SizeFigure.Big => (cellWidth, cellHeight),
                 _ => throw new NotImplementedException()
@@ -122,8 +126,11 @@ namespace TableTop2D.Core.WorkTable
 
         private void DeleteFigure(object sender, RoutedEventArgs e)
         {
-            _FigureCanvas.Children.Clear();
+            FigureDeleted?.Invoke();
+            DeleteFigure();
         }
+
+        public void DeleteFigure() =>_FigureCanvas.Children.Clear();
 
         #region Previews
         private void PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -164,6 +171,8 @@ namespace TableTop2D.Core.WorkTable
 
         private void DragStarted()
         {
+            FigureMoving?.Invoke();
+
             _isDragging = true;
             _OriginalLeft = Canvas.GetLeft(_OriginalElement);
             _OriginalTop = Canvas.GetTop(_OriginalElement);
@@ -175,6 +184,8 @@ namespace TableTop2D.Core.WorkTable
 
         private void DragMoved()
         {
+            FigureMoving?.Invoke();
+
             if (_OverlayElement == null) return;
 
             var currentPosition = Mouse.GetPosition(_FigureCanvas);
@@ -185,6 +196,8 @@ namespace TableTop2D.Core.WorkTable
 
         private void DragFinished(bool cancelled)
         {
+            FigureMoving?.Invoke();
+
             Mouse.Capture(null);
             if (_isDragging && _OverlayElement != null)
             {

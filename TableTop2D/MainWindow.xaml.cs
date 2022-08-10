@@ -152,6 +152,15 @@ namespace TableTop2D
             _ProjectTable.CreateNewImage(ref _ProjectTable, figure, image);
         }
 
+        private void CreateNewSegment(object sender, RoutedEventArgs e)
+        {
+            var figure = GetIFigureType();
+
+            if (_ProjectTable == null) throw new Exception();
+
+            _ProjectTable.CreateNewSegment(ref _ProjectTable, figure);
+        }
+
         private IFigure GetIFigureType()
         {
             return _SelectedFigureName switch
