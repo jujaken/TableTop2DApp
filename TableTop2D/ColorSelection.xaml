@@ -33,9 +33,9 @@
             </Grid.ColumnDefinitions>
             <Slider Grid.Column="0" Orientation="Vertical" Maximum="255" Minimum="0" Value="{Binding A, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
             <Grid Grid.Column="1" Width="264" Height="264" HorizontalAlignment="Center" VerticalAlignment="Top" Background="White">
-                <Grid x:Name="ColorGradient">
+                <Grid x:Name="ColorGradient" Width="257" Height="257">
                     <Grid Width="256" Height="256" Background="{Binding GradientBrush}"/>
-                    <Grid Width="257" Height="257">
+                    <Grid>
                         <Grid.Background>
                             <LinearGradientBrush EndPoint="0,1">
                                 <GradientStop Color="#00FFFFFF" Offset="0.1"/>
