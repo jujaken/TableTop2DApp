@@ -88,14 +88,14 @@ namespace TableTop2D
                     Owner = this
                 };
 
-                _ColorSelection.Closing += SetColor;
+                _ColorSelection.Done += SetColor;
 
                 _ColorSelection.Show();
             }
             else SetFigureStandartColorClick(CurrentButton, e);
         }
 
-        private void SetColor(object? sender, CancelEventArgs e)
+        private void SetColor()
         {
             if (CurrentButton == null || _ColorSelection == null) throw new Exception("Я не знаю как, но ты всё сломал");
             CurrentButton.Foreground = _ColorSelection.BrushColor;

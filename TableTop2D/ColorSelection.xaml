@@ -3,13 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:TableTop2D.Core"
         mc:Ignorable="d"
         WindowStyle="ToolWindow"
         Height="340" Width="445" 
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Background="DarkCyan">
-
+    <Window.DataContext>
+        <vm:ColorSelectionVM/>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -28,10 +31,18 @@
                 <ColumnDefinition Width="20"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Slider Grid.Column="0" Orientation="Vertical"/>
+            <Slider Grid.Column="0" Orientation="Vertical" Maximum="255" Minimum="0" Value="{Binding A, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
             <Grid Grid.Column="1" Width="264" Height="264" HorizontalAlignment="Center" VerticalAlignment="Top" Background="White">
-                <Grid Width="256" Height="256" HorizontalAlignment="Center" Background="Black">
-
+                <Grid x:Name="ColorGradient">
+                    <Grid Width="256" Height="256" Background="{Binding GradientBrush}"/>
+                    <Grid Width="257" Height="257">
+                        <Grid.Background>
+                            <LinearGradientBrush EndPoint="0,1">
+                                <GradientStop Color="#00FFFFFF" Offset="0.1"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Grid.Background>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
@@ -54,24 +65,26 @@
                     <RowDefinition/>
                     <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Background="Black"/>
+                <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Background="White">
+                    <Grid x:Name="ViewColor" Background="{Binding CurrentColor, UpdateSourceTrigger=PropertyChanged}" Margin="3"/>
+                </Grid>
                 <TextBlock Grid.Row="2" Text="A" VerticalAlignment ="Center" HorizontalAlignment ="Center" Foreground="Snow" FontFamily="Cascadia Code SemiBold" FontSize="14"/>
-                <TextBox x:Name="TextBlockA" Grid.Row="2" Grid.Column="2" Text="255" Background="White" Foreground="DarkCyan" BorderBrush="{x:Null}" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <TextBox x:Name="TextBlockA" Grid.Row="2" Grid.Column="2" Text="{Binding A, UpdateSourceTrigger=PropertyChanged}" Background="White" Foreground="DarkCyan" BorderBrush="{x:Null}" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
 
                 </TextBox>
                 <TextBlock  Grid.Row="3" Text="R" VerticalAlignment ="Center" HorizontalAlignment ="Center" Foreground="Snow" FontFamily="Cascadia Code SemiBold" FontSize="14"/>
-                <TextBox x:Name="TextBlockR" Grid.Row="3" Grid.Column="2" Text="255" Background="White" Foreground="DarkCyan" BorderBrush="{x:Null}" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <TextBox x:Name="TextBlockR" Grid.Row="3" Grid.Column="2" Text="{Binding R, UpdateSourceTrigger=PropertyChanged}" Background="White" Foreground="DarkCyan" BorderBrush="{x:Null}" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
 
                 </TextBox>
                 <TextBlock Grid.Row="4" Text="G" VerticalAlignment ="Center" HorizontalAlignment ="Center" Foreground="Snow" FontFamily="Cascadia Code SemiBold" FontSize="14"/>
-                <TextBox x:Name="TextBlockG" Grid.Row="4" Grid.Column="2" Text="255" Background="White" Foreground="DarkCyan" BorderBrush="{x:Null}" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <TextBox x:Name="TextBlockG" Grid.Row="4" Grid.Column="2" Text="{Binding G, UpdateSourceTrigger=PropertyChanged}" Background="White" Foreground="DarkCyan" BorderBrush="{x:Null}" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
 
                 </TextBox>
-                <TextBox x:Name="TextBlockB" Grid.Row="5" Grid.Column="2" Text="255" Background="White" Foreground="DarkCyan" BorderBrush="{x:Null}" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <TextBox x:Name="TextBlockB" Grid.Row="5" Grid.Column="2" Text="{Binding B, UpdateSourceTrigger=PropertyChanged}" Background="White" Foreground="DarkCyan" BorderBrush="{x:Null}" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
 
                 </TextBox>
                 <TextBlock Grid.Row="5" Text="B" VerticalAlignment ="Center" HorizontalAlignment ="Center" Foreground="Snow" FontFamily="Cascadia Code SemiBold" FontSize="14"/>
-                <TextBox x:Name="ColorCode" Grid.Row="7" Grid.Column="2" Text="#ffffff" Background="White" Foreground="DarkCyan" BorderBrush="{x:Null}" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <TextBox x:Name="ColorCode" Grid.Row="7" Grid.Column="2" Text="{Binding Hex, UpdateSourceTrigger=PropertyChanged}" Background="White" Foreground="DarkCyan" BorderBrush="{x:Null}" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
 
                 </TextBox>
                 <TextBlock Grid.Row="7" Text="#" VerticalAlignment ="Center" HorizontalAlignment ="Center" Foreground="Snow" FontFamily="Cascadia Code SemiBold" FontSize="14"/>

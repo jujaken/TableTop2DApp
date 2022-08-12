@@ -8,6 +8,7 @@ namespace TableTop2D
     /// <summary> Логика взаимодействия для ColorSelection.xaml  </summary>
     public partial class ColorSelection : Window
     {
+        public Action? Done;
         public Brush? BrushColor { get; private set; }
         public ColorSelection()
         {
@@ -18,10 +19,8 @@ namespace TableTop2D
         {
             try
             {
-                BrushColor = new SolidColorBrush()
-                {
-                    Color = Color.FromArgb(Convert.ToByte(TextBlockA.Text), Convert.ToByte(TextBlockR.Text), Convert.ToByte(TextBlockG.Text), Convert.ToByte(TextBlockB.Text))
-                };
+                BrushColor = ViewColor.Background;
+                Done?.Invoke();
                 Close();
             }
             catch
