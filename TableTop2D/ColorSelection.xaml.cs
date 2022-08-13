@@ -55,6 +55,7 @@ namespace TableTop2D
         private void ColorGradient_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
             => _MouseIsDown = false;
 
+        private PickColor? pick;
         private void SetPointPos()
         {
             var pos = Mouse.GetPosition(ColorGradient);
@@ -67,8 +68,7 @@ namespace TableTop2D
 
             try
             {
-                var pick = new PickColor(ColorGradient);
-                var color = new SolidColorBrush(pick.GetPixelColor((int)x, (int)y));
+                var color = new SolidColorBrush((pick ??= new PickColor(ColorGradient)).GetPixelColor((int)x, (int)y));
 
                 TextBlockA.Text = color.Color.A.ToString();
                 TextBlockR.Text = color.Color.R.ToString();
