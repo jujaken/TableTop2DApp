@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using TableTop2D.Core;
 
 namespace TableTop2D
 {
@@ -36,6 +37,7 @@ namespace TableTop2D
         }
 
         #region Mouse Events
+
         private void ColorGradient_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             _MouseIsDown = true;
@@ -57,8 +59,26 @@ namespace TableTop2D
         {
             var pos = Mouse.GetPosition(ColorGradient);
 
-            Canvas.SetLeft(_PointCurrentColor, pos.X - _PointCurrentColor.Width / 2);
-            Canvas.SetTop(_PointCurrentColor, pos.Y - _PointCurrentColor.Height / 2);
+            var x = pos.X - _PointCurrentColor.Width / 2;
+            var y = pos.Y - _PointCurrentColor.Height / 2;
+
+            Canvas.SetLeft(_PointCurrentColor, x);
+            Canvas.SetTop(_PointCurrentColor, y);
+
+            try
+            {
+                var pick = new PickColor(ColorGradient);
+                var color = new SolidColorBrush(pick.GetPixelColor((int)x, (int)y));
+
+                TextBlockA.Text = color.Color.A.ToString();
+                TextBlockR.Text = color.Color.R.ToString();
+                TextBlockG.Text = color.Color.G.ToString();
+                TextBlockB.Text = color.Color.B.ToString();
+            }
+            catch
+            {
+
+            }
         }
 
         private bool CanSetPointPos()
