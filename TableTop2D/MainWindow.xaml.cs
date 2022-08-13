@@ -7,6 +7,7 @@ using TableTop2D.Core.Base.Interfaces;
 using TableTop2D.Core.WorkTable;
 using TableTop2D.Core.Figures;
 using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace TableTop2D
 {
@@ -172,6 +173,51 @@ namespace TableTop2D
             };
         }
 
+        
+
+        #region SaveImage
+
+        private void SaveImage(object sender, RoutedEventArgs e)
+        {
+            WriteToPng(CenterMenu,
+                $"{DateTime.Now.Second}." +
+                $"{DateTime.Now.Minute}." +
+                $"{DateTime.Now.Hour}." +
+                $"{DateTime.Now.Day}." +
+                $"{DateTime.Now.Month}." +
+                $"{DateTime.Now.Year}.png");
+        }
+
+        private void WriteToPng(UIElement element, string filename)
+        {
+            var rect = new Rect(element.RenderSize);
+            var visual = new DrawingVisual();
+
+            using (var dc = visual.RenderOpen())
+            {
+                dc.DrawRectangle(new VisualBrush(element), null, rect);
+            }
+
+            var bitmap = new RenderTargetBitmap((int)rect.Width, (int)rect.Height, 96, 96, PixelFormats.Default);
+            bitmap.Render(visual);
+
+            var encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bitmap));
+
+            var dir = Directory.CreateDirectory($@"{Environment.CurrentDirectory}\Image\");
+
+            using var file = File.OpenWrite(dir.FullName + filename);
+            encoder.Save(file);
+
+            MessageBox.Show("Сохранение произошло успешно!");
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Context Menu 2
+
         private void ResetColor(object sender, RoutedEventArgs e)
         {
             var menuItem = sender as MenuItem ?? throw new Exception("Я не знаю как, но ты всё сломал");
@@ -180,8 +226,9 @@ namespace TableTop2D
             {
                 button.Foreground = Brushes.Teal;
                 button.Content = "⭕";
-            }    
+            }
         }
+
         #endregion
     }
 }

@@ -56,6 +56,7 @@
                     <MenuItem Header="Создать фигуру" Click="CreateNewFigure"/>
                     <MenuItem Header="Вставить изображение" Click="CreateNewImage"/>
                     <MenuItem Header="Создать отрезок" Click="CreateNewSegment"/>
+                    <MenuItem Header="Сохранить как png" Click="SaveImage"/>
                 </ContextMenu>
             </Grid.ContextMenu>
         </Grid>
