@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -7,6 +6,8 @@ using TableTop2D.Core.Base.Interfaces;
 using TableTop2D.Core.WorkTable;
 using TableTop2D.Core.Figures;
 using System.Windows.Media.Imaging;
+using System.Windows.Input;
+using System.IO;
 
 namespace TableTop2D
 {
@@ -27,6 +28,14 @@ namespace TableTop2D
         public MainWindow()
         {
             InitializeComponent();
+
+            MouseWheel += ScalingUse;
+        }
+
+        private void ScalingUse(object sender, MouseWheelEventArgs e)
+        {
+            Scaling.ScaleX += e.Delta > 0 ? 0.05 : -0.05;
+            Scaling.ScaleY += e.Delta > 0 ? 0.05 : -0.05;
         }
 
         #region ButtonsClick
@@ -42,6 +51,8 @@ namespace TableTop2D
                 var canvas = new Canvas() { Width = 500, Height = 500, Background = Brushes.White };
                 _ProjectTable = new ProjectTable(ref canvas, width, height);
                 CenterMenu.Children.Add(canvas);
+                HelloMenu.Height = 0;
+                HelloMenu.Width = 0;
             }
             catch (FormatException)
             {
@@ -88,14 +99,14 @@ namespace TableTop2D
                     Owner = this
                 };
 
-                _ColorSelection.Closing += SetColor;
+                _ColorSelection.Done += SetColor;
 
                 _ColorSelection.Show();
             }
             else SetFigureStandartColorClick(CurrentButton, e);
         }
 
-        private void SetColor(object? sender, CancelEventArgs e)
+        private void SetColor()
         {
             if (CurrentButton == null || _ColorSelection == null) throw new Exception("Я не знаю как, но ты всё сломал");
             CurrentButton.Foreground = _ColorSelection.BrushColor;
@@ -152,6 +163,15 @@ namespace TableTop2D
             _ProjectTable.CreateNewImage(ref _ProjectTable, figure, image);
         }
 
+        private void CreateNewSegment(object sender, RoutedEventArgs e)
+        {
+            var figure = GetIFigureType();
+
+            if (_ProjectTable == null) throw new Exception();
+
+            _ProjectTable.CreateNewSegment(ref _ProjectTable, figure);
+        }
+
         private IFigure GetIFigureType()
         {
             return _SelectedFigureName switch
@@ -163,6 +183,51 @@ namespace TableTop2D
             };
         }
 
+        
+
+        #region SaveImage
+
+        private void SaveImage(object sender, RoutedEventArgs e)
+        {
+            WriteToPng(CenterMenu,
+                $"{DateTime.Now.Second}." +
+                $"{DateTime.Now.Minute}." +
+                $"{DateTime.Now.Hour}." +
+                $"{DateTime.Now.Day}." +
+                $"{DateTime.Now.Month}." +
+                $"{DateTime.Now.Year}.png");
+        }
+
+        private void WriteToPng(UIElement element, string filename)
+        {
+            var rect = new Rect(element.RenderSize);
+            var visual = new DrawingVisual();
+
+            using (var dc = visual.RenderOpen())
+            {
+                dc.DrawRectangle(new VisualBrush(element), null, rect);
+            }
+
+            var bitmap = new RenderTargetBitmap((int)rect.Width, (int)rect.Height, 96, 96, PixelFormats.Default);
+            bitmap.Render(visual);
+
+            var encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bitmap));
+
+            var dir = Directory.CreateDirectory($@"{Environment.CurrentDirectory}\Image\");
+
+            using var file = File.OpenWrite(dir.FullName + filename);
+            encoder.Save(file);
+
+            MessageBox.Show("Сохранение произошло успешно!");
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Context Menu 2
+
         private void ResetColor(object sender, RoutedEventArgs e)
         {
             var menuItem = sender as MenuItem ?? throw new Exception("Я не знаю как, но ты всё сломал");
@@ -171,8 +236,9 @@ namespace TableTop2D
             {
                 button.Foreground = Brushes.Teal;
                 button.Content = "⭕";
-            }    
+            }
         }
+
         #endregion
     }
 }
