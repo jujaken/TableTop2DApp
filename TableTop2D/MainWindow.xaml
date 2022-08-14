@@ -10,7 +10,7 @@
         MinHeight="600" MinWidth="600"
         WindowStartupLocation="CenterScreen">
     <Grid Background="DarkCyan">
-        <Border Height="450" Width="300" CornerRadius="20" Background="White" >
+        <Border x:Name="HelloMenu" Height="450" Width="300" CornerRadius="20" Background="White" >
             <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="20" ShowGridLines="False">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.35*"/>
@@ -51,9 +51,15 @@
             </Grid>
         </Border>
         <Grid x:Name="CenterMenu" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,50,20,20">
+            <Grid.RenderTransform>
+                <ScaleTransform x:Name="Scaling" CenterX="250" CenterY="250">
+
+                </ScaleTransform>
+            </Grid.RenderTransform>
             <Grid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Создать фигуру" Click="CreateNewFigure"/>
+                    <MenuItem Header="Вставить изображение" Click="CreateNewImage"/>
                     <MenuItem Header="Вставить изображение" Click="CreateNewImage"/>
                     <MenuItem Header="Создать отрезок" Click="CreateNewSegment"/>
                     <MenuItem Header="Сохранить как png" Click="SaveImage"/>
