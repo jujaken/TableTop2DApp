@@ -6,6 +6,7 @@ using TableTop2D.Core.Base.Interfaces;
 using TableTop2D.Core.WorkTable;
 using TableTop2D.Core.Figures;
 using System.Windows.Media.Imaging;
+using System.Windows.Input;
 
 namespace TableTop2D
 {
@@ -26,6 +27,14 @@ namespace TableTop2D
         public MainWindow()
         {
             InitializeComponent();
+
+            MouseWheel += ScalingUse;
+        }
+
+        private void ScalingUse(object sender, MouseWheelEventArgs e)
+        {
+            Scaling.ScaleX += e.Delta > 0 ? 0.05 : -0.05;
+            Scaling.ScaleY += e.Delta > 0 ? 0.05 : -0.05;
         }
 
         #region ButtonsClick
@@ -41,6 +50,8 @@ namespace TableTop2D
                 var canvas = new Canvas() { Width = 500, Height = 500, Background = Brushes.White };
                 _ProjectTable = new ProjectTable(ref canvas, width, height);
                 CenterMenu.Children.Add(canvas);
+                HelloMenu.Height = 0;
+                HelloMenu.Width = 0;
             }
             catch (FormatException)
             {
