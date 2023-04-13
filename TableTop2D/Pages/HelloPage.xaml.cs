@@ -23,7 +23,7 @@ namespace TableTop2D.Pages
             InitializeComponent();
         }
 
-        public HelloPage(ref Page MainWindow) : this()
+        public HelloPage(Page MainWindow) : this()
         {
             
         }

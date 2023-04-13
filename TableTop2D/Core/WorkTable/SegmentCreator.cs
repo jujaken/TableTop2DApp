@@ -20,7 +20,7 @@ namespace TableTop2D.Core.WorkTable
 
         #endregion
 
-        public SegmentCreator(ref ProjectTable workTable, Brush color)
+        public SegmentCreator(ProjectTable workTable, Brush color)
         {
             _WorkTable = workTable;
 
@@ -49,8 +49,8 @@ namespace TableTop2D.Core.WorkTable
             #endregion
 
             var pointFigure = new Figures.Ellipse(Brushes.DarkRed, IFigure.SizeFigure.Point);
-            _SegmentOrigin = new FigureCreator(ref workTable, pointFigure);
-            _SegmentEnd = new FigureCreator(ref workTable, pointFigure);
+            _SegmentOrigin = new FigureCreator(workTable, pointFigure);
+            _SegmentEnd = new FigureCreator(workTable, pointFigure);
 
             _SegmentOrigin.FigureMoving += LinePrintOrigin;
             _SegmentEnd.FigureMoving += LinePrintEnd;
