@@ -34,8 +34,16 @@ namespace TableTop2D
 
         private void ScalingUse(object sender, MouseWheelEventArgs e)
         {
-            Scaling.ScaleX += e.Delta > 0 ? 0.05 : -0.05;
-            Scaling.ScaleY += e.Delta > 0 ? 0.05 : -0.05;
+            var x = e.Delta > 0 ? 0.05 : -0.05;
+            var y = e.Delta > 0 ? 0.05 : -0.05;
+
+            Scaling.ScaleX += x;
+            Scaling.ScaleY += y;
+
+            if (_ProjectTable == null) return;
+
+            _ProjectTable.CurrentScalingX = Scaling.ScaleX;
+            _ProjectTable.CurrentScalingY = Scaling.ScaleY;
         }
 
         #region ButtonsClick
@@ -49,7 +57,7 @@ namespace TableTop2D
                 var width = HelloMenuWidth.Text == "Высота" ? height : Convert.ToByte(HelloMenuWidth.Text);
 
                 var canvas = new Canvas() { Width = 500, Height = 500, Background = Brushes.White };
-                _ProjectTable = new ProjectTable(ref canvas, width, height);
+                _ProjectTable = new ProjectTable(canvas, width, height);
                 CenterMenu.Children.Add(canvas);
                 HelloMenu.Height = 0;
                 HelloMenu.Width = 0;
@@ -129,7 +137,7 @@ namespace TableTop2D
 
             if (_ProjectTable == null) throw new Exception();
 
-            _ProjectTable.CreateNewFigure(ref _ProjectTable, figure);
+            _ProjectTable.CreateNewFigure(_ProjectTable, figure);
         }
 
         private void CreateNewImage(object sender, RoutedEventArgs e)
@@ -160,7 +168,7 @@ namespace TableTop2D
 
             if (_ProjectTable == null) throw new Exception();
 
-            _ProjectTable.CreateNewImage(ref _ProjectTable, figure, image);
+            _ProjectTable.CreateNewImage(_ProjectTable, figure, image);
         }
 
         private void CreateNewSegment(object sender, RoutedEventArgs e)
@@ -169,7 +177,7 @@ namespace TableTop2D
 
             if (_ProjectTable == null) throw new Exception();
 
-            _ProjectTable.CreateNewSegment(ref _ProjectTable, figure);
+            _ProjectTable.CreateNewSegment(_ProjectTable, figure);
         }
 
         private IFigure GetIFigureType()

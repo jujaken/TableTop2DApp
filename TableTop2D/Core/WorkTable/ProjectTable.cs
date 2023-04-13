@@ -22,9 +22,12 @@ namespace TableTop2D.Core.WorkTable
 
         /// <summary> Текущая позиция курсора </summary>
         public Point CursorPosition { get; private set; }
+        public double CurrentScalingX { get; internal set; } = 1;
+        public double CurrentScalingY { get; internal set; } = 1;
+
         private Border[,] _TableBorders;
 
-        public ProjectTable(ref Canvas tableCanvas, byte width, byte height)
+        public ProjectTable(Canvas tableCanvas, byte width, byte height)
         {
             Size = (width, height);
             TableCanvas = tableCanvas;
@@ -33,21 +36,21 @@ namespace TableTop2D.Core.WorkTable
             TableCanvas.MouseRightButtonDown += MouseRightButtonDown;
         }
 
-        public void CreateNewFigure(ref ProjectTable workTable, IFigure figure)
+        public void CreateNewFigure(ProjectTable workTable, IFigure figure)
         {
-            new FigureCreator(ref workTable, figure);
+            new FigureCreator(workTable, figure);
             workTable.FigureList.Add(figure);
         }
 
-        public void CreateNewImage(ref ProjectTable workTable, IFigure figure, Image image)
+        public void CreateNewImage(ProjectTable workTable, IFigure figure, Image image)
         {
-            new FigureCreator(ref workTable, figure, image);
+            new FigureCreator(workTable, figure, image);
             workTable.FigureList.Add(figure);
         }
 
-        public void CreateNewSegment(ref ProjectTable workTable, IFigure figure)
+        public void CreateNewSegment(ProjectTable workTable, IFigure figure)
         {
-            new SegmentCreator(ref workTable, figure.Color);
+            new SegmentCreator(workTable, figure.Color);
             workTable.FigureList.Add(figure);
         }
 

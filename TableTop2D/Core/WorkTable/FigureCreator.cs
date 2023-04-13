@@ -31,7 +31,7 @@ namespace TableTop2D.Core.WorkTable
         public event Action? FigureDeleted;
         public event Action? FigureMoving;
 
-        public FigureCreator(ref ProjectTable workTable, IFigure figure, Image? image = null)
+        public FigureCreator(ProjectTable workTable, IFigure figure, Image? image = null)
         {
             _WorkTable = workTable;
 
@@ -130,7 +130,7 @@ namespace TableTop2D.Core.WorkTable
             DeleteFigure();
         }
 
-        public void DeleteFigure() =>_FigureCanvas.Children.Clear();
+        public void DeleteFigure() => _FigureCanvas.Children.Clear();
 
         #region Previews
         private void PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -190,8 +190,11 @@ namespace TableTop2D.Core.WorkTable
 
             var currentPosition = Mouse.GetPosition(_FigureCanvas);
 
-            _OverlayElement.LeftOffset = currentPosition.X - _StartPoint.X;
-            _OverlayElement.TopOffset = currentPosition.Y - _StartPoint.Y;
+            //_OverlayElement.LeftOffset = currentPosition.X - _StartPoint.X;
+            //_OverlayElement.TopOffset = currentPosition.Y - _StartPoint.Y;
+
+            _OverlayElement.LeftOffset = (currentPosition.X - _StartPoint.X) * _WorkTable.CurrentScalingX;
+            _OverlayElement.TopOffset = (currentPosition.Y - _StartPoint.Y) * _WorkTable.CurrentScalingY;
         }
 
         private void DragFinished(bool cancelled)
